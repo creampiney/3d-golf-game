@@ -15,8 +15,8 @@ export default function Plane(props: PlaneProps) {
         receiveShadow
         name="plane"
       >
-        <planeGeometry args={[10, 10]} />
-        <meshBasicMaterial opacity={0.7} transparent={true} color="black" />
+        <planeGeometry args={[20, 20]} />
+        <meshBasicMaterial color="white" />
       </mesh>
     )
   }
