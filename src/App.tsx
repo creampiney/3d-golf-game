@@ -1,34 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Debug, Physics } from '@react-three/cannon'
 import './App.css'
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls, Stats } from '@react-three/drei';
+import Plane from './objects/Plane';
+import GolfBall from './objects/GolfBall';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Canvas  style={{ width: '100vw', height: '100vh' }} shadows camera={{ position: [10, 10, 10], fov: 30 }}>
+      <color attach="background" args={["#94ebd8"]} />
+      <ambientLight intensity={0.1} />
+      <spotLight
+        position={[2.5, 5, 5]}
+        angle={Math.PI / 4}
+        penumbra={0.5}
+        castShadow
+      />
+      <OrbitControls target-y={0.5} />
+      <axesHelper args={[5]} />
+      <Physics>
+        {/* <Debug > */}
+          <Plane />
+          <GolfBall />
+        {/* </Debug> */}
+      </Physics>
+      <Stats />
+    </Canvas>
   )
 }
 
