@@ -1,34 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Debug, Physics } from '@react-three/cannon'
 import './App.css'
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls, Stats } from '@react-three/drei';
+import Plane from './objects/Plane';
+import GolfBall from './objects/GolfBall';
+import Wall from './objects/Wall';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Canvas  style={{ width: '100vw', height: '100vh' }} shadows camera={{ position: [10, 10, 10], fov: 30 }}>
+      <color attach="background" args={["#94ebd8"]} />
+      <ambientLight intensity={0.2} />
+      <spotLight
+        position={[2.5, 5, 5]}
+        angle={Math.PI / 4}
+        penumbra={0.5}
+        castShadow
+      />
+      <OrbitControls 
+        minAzimuthAngle={-Math.PI / 6}
+      />
+      <axesHelper args={[5]} />
+      <Physics defaultContactMaterial={{friction:0.05, restitution: 0.9}}>
+        {/* <Debug > */}
+          <Plane position={[0, 0, 0]} args={[18, 18]}/>
+          <GolfBall position={[0, 2, 0]} />
+          <Wall position={[9.5, 0.5, 0]} args={[1, 1, 20]}/>
+          <Wall position={[-9.5, 0.5, 0]} args={[1, 1, 20]}/>
+          <Wall position={[0, 0.5, 9.5]} args={[20, 1, 1]}/>
+          <Wall position={[0, 0.5, -9.5]} args={[20, 1, 1]}/>
+        {/* </Debug> */}
+      </Physics>
+      <Stats />
+    </Canvas>
   )
 }
 
