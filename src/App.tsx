@@ -25,7 +25,7 @@ function App() {
       <Physics defaultContactMaterial={{friction:0.05, restitution: 0.9}}>
         {/* <Debug > */}
           <Plane />
-          <GolfBall />
+          <GolfBall position={[0, 2, 0]} />
           <Wall position={[9.5, 0.5, 0]} args={[1, 1, 20]}/>
           <Wall position={[-9.5, 0.5, 0]} args={[1, 1, 20]}/>
           <Wall position={[0, 0.5, 9.5]} args={[20, 1, 1]}/>
