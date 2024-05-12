@@ -24,7 +24,7 @@ function App() {
       <axesHelper args={[5]} />
       <Physics defaultContactMaterial={{friction:0.05, restitution: 0.9}}>
         {/* <Debug > */}
-          <Plane />
+          <Plane position={[0, 0, 0]} args={[18, 18]}/>
           <GolfBall position={[0, 2, 0]} />
           <Wall position={[9.5, 0.5, 0]} args={[1, 1, 20]}/>
           <Wall position={[-9.5, 0.5, 0]} args={[1, 1, 20]}/>
