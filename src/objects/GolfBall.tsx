@@ -74,9 +74,9 @@ const GolfBall = (props: SphereProps) => {
 
 
   return (
-    <mesh ref={ref} onPointerDown={() => api.velocity.set(15,0,0)}>
+    <mesh ref={ref} castShadow receiveShadow onPointerDown={() => api.velocity.set(15,0,0) }>
         <sphereGeometry args={[0.1]}/>
-        <meshBasicMaterial map={golfMap} color="white" />
+        <meshPhongMaterial map={golfMap} color="white" />
     </mesh>
   )
 }
