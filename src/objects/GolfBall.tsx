@@ -1,5 +1,6 @@
 import { SphereProps, useSphere } from "@react-three/cannon"
-import { useTexture } from "@react-three/drei"
+import { useKeyboardControls, useTexture } from "@react-three/drei"
+import { useFrame } from "@react-three/fiber"
 import { useEffect, useRef, useState } from "react"
 import { Mesh, Vector3 } from "three"
 
@@ -28,6 +29,33 @@ const GolfBall = (props: SphereProps) => {
     
     const stationaryCounter = useRef<number>(0)
     const [isStationary, setStationary] = useState<boolean>(false)
+
+
+    // Keyboard Status
+    const leftPolarPressed = useKeyboardControls((state) => state['leftPolar'])
+    const rightPolarPressed = useKeyboardControls((state) => state['rightPolar'])
+    const upAzimuthPressed = useKeyboardControls((state) => state['upAzimuth'])
+    const downAzimuthPressed = useKeyboardControls((state) => state['downAzimuth'])
+    const increasePowerPressed = useKeyboardControls((state) => state['increasePower'])
+    const decreasePowerPressed = useKeyboardControls((state) => state['decreasePower'])
+    const shootPressed = useKeyboardControls((state) => state['shoot'])
+
+    // Shooting Status
+    const [polar, setPolar] = useState<number>(0)
+    const [azimuth, setAzimuth] = useState<number>(0)
+    const [power, setPower] = useState<number>(50)
+
+
+    function shoot() {
+      const azimuthRadian = azimuth * Math.PI / 180
+      const polarRadian = polar * Math.PI / 180
+      const weightedPower = power / 5
+      api.velocity.set(
+        weightedPower * Math.cos(azimuthRadian) * Math.cos(polarRadian), 
+        weightedPower * Math.sin(azimuthRadian), 
+        weightedPower * Math.cos(azimuthRadian) * Math.sin(polarRadian)
+      )
+    }
 
 
     // Subscribing API of golf ball
@@ -67,14 +95,46 @@ const GolfBall = (props: SphereProps) => {
       previousGolfVelocity.current = new Vector3(...currentGolfVelocity)
     }, [currentGolfPosition])
 
-    // Maybe use? (maybe later)
+    // Reset shooting status if ball is stationary
     useEffect(() => {
-      console.log(isStationary)
+      if (isStationary) {
+        setAzimuth(0)
+        setPolar(0)
+        setPower(50)
+      }
     }, [isStationary])
 
 
+    // Update frame
+    useFrame((state, delta) => {
+      if (isStationary) {
+        if (shootPressed) {
+          shoot()
+        }
+        else if (upAzimuthPressed) {
+          setAzimuth((e) => Math.min(e + 2, 80))
+        }
+        else if (downAzimuthPressed) {
+          setAzimuth((e) => Math.max(e - 2, 0))
+        }
+        else if (leftPolarPressed) {
+          setPolar((e) => e - 2)
+        }
+        else if (rightPolarPressed) {
+          setPolar((e) => e + 2)
+        }
+        else if (increasePowerPressed) {
+          setPower((e) => Math.min(e + 2, 100))
+        }
+        else if (decreasePowerPressed) {
+          setPower((e) => Math.max(e - 2, 0))
+        }
+      }
+    })
+
+
   return (
-    <mesh ref={ref} onPointerDown={() => api.velocity.set(15,0,0)}>
+    <mesh ref={ref}>
         <sphereGeometry args={[0.1]}/>
         <meshBasicMaterial map={golfMap} color="white" />
     </mesh>
