@@ -1,5 +1,5 @@
 import { SphereProps, useSphere } from "@react-three/cannon"
-import { useKeyboardControls, useTexture } from "@react-three/drei"
+import { Line, useKeyboardControls, useTexture } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 import { useEffect, useRef, useState } from "react"
 import { Mesh, Vector3 } from "three"
@@ -46,7 +46,10 @@ const GolfBall = (props: SphereProps) => {
     const [power, setPower] = useState<number>(50)
 
 
+    // Shooting Function
     function shoot() {
+      if (power == 0) return
+
       const azimuthRadian = azimuth * Math.PI / 180
       const polarRadian = polar * Math.PI / 180
       const weightedPower = power / 5
@@ -97,6 +100,7 @@ const GolfBall = (props: SphereProps) => {
 
     // Reset shooting status if ball is stationary
     useEffect(() => {
+      console.log(isStationary)
       if (isStationary) {
         setAzimuth(0)
         setPolar(0)
@@ -134,10 +138,31 @@ const GolfBall = (props: SphereProps) => {
 
 
   return (
-    <mesh ref={ref}>
+    <>
+      <mesh ref={ref}>
         <sphereGeometry args={[0.1]}/>
         <meshBasicMaterial map={golfMap} color="white" />
-    </mesh>
+      </mesh>
+      {
+        isStationary && (
+          <Line
+            points={[
+                currentGolfPosition,
+                [
+                  currentGolfPosition.x + 1 * Math.cos(azimuth * Math.PI / 180) * Math.cos(polar * Math.PI / 180),
+                  currentGolfPosition.y + 1 * Math.sin(azimuth * Math.PI / 180),
+                  currentGolfPosition.z + 1 * Math.cos(azimuth * Math.PI / 180) * Math.sin(polar * Math.PI / 180),
+                ]
+            ]}
+            color={"#23aaff"}
+            lineWidth={5}           // In pixels (default)
+            // segments             // If true, renders a THREE.LineSegments2. Otherwise, renders a THREE.Line2
+          />
+        )
+      }
+      
+    </>
+    
   )
 }
 
