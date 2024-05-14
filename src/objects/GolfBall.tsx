@@ -1,5 +1,5 @@
 import { SphereProps, useSphere } from "@react-three/cannon"
-import { Line, useKeyboardControls, useTexture } from "@react-three/drei"
+import { CameraControls, Line, useKeyboardControls, useTexture } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 import { useEffect, useRef, useState } from "react"
 import { Mesh, Vector3 } from "three"
@@ -8,6 +8,8 @@ import { useGlobalStatusStore } from "../states/globalStatus"
 
 
 const GolfBall = (props: SphereProps) => {
+
+    const cameraControlRef = useRef<CameraControls>(null)
 
     const [setGlobalStationary] = useGlobalStatusStore((state) => [
       state.setStationary
@@ -42,17 +44,17 @@ const GolfBall = (props: SphereProps) => {
 
 
     // Keyboard Status
-    const leftPolarPressed = useKeyboardControls((state) => state['leftPolar'])
-    const rightPolarPressed = useKeyboardControls((state) => state['rightPolar'])
-    const upAzimuthPressed = useKeyboardControls((state) => state['upAzimuth'])
-    const downAzimuthPressed = useKeyboardControls((state) => state['downAzimuth'])
+    const upPolarPressed = useKeyboardControls((state) => state['upPolar'])
+    const downPolarPressed = useKeyboardControls((state) => state['downPolar'])
+    const leftAzimuthPressed = useKeyboardControls((state) => state['leftAzimuth'])
+    const rightAzimuthPressed = useKeyboardControls((state) => state['rightAzimuth'])
     const increasePowerPressed = useKeyboardControls((state) => state['increasePower'])
     const decreasePowerPressed = useKeyboardControls((state) => state['decreasePower'])
     const shootPressed = useKeyboardControls((state) => state['shoot'])
 
     // Shooting Status
-    const [polar, setPolar] = useState<number>(0)
-    const [azimuth, setAzimuth] = useState<number>(0)
+    const [polar, setPolar] = useState<number>(90)
+    const [azimuth, setAzimuth] = useState<number>(180)
     const [power, setPower] = useState<number>(50)
 
     // Old shooting position
@@ -67,9 +69,9 @@ const GolfBall = (props: SphereProps) => {
       const polarRadian = polar * Math.PI / 180
       const weightedPower = power / 2
       api.velocity.set(
-        weightedPower * Math.cos(azimuthRadian) * Math.cos(polarRadian), 
-        weightedPower * Math.sin(azimuthRadian), 
-        weightedPower * Math.cos(azimuthRadian) * Math.sin(polarRadian)
+        weightedPower * Math.sin(polarRadian) * Math.sin(azimuthRadian), 
+        weightedPower * Math.cos(polarRadian), 
+        weightedPower * Math.sin(polarRadian) * Math.cos(azimuthRadian)
       )
     }
 
@@ -117,7 +119,7 @@ const GolfBall = (props: SphereProps) => {
       previousGolfPosition.current = new Vector3(...currentGolfPosition)
       previousGolfVelocity.current = new Vector3(...currentGolfVelocity)
 
-      if (currentGolfPosition.y <= -30) {
+      if (currentGolfPosition.y <= -10) {
         onFall()
       }
     }, [currentGolfPosition])
@@ -126,9 +128,6 @@ const GolfBall = (props: SphereProps) => {
     useEffect(() => {
       console.log(isStationary)
       if (isStationary) {
-        // setAzimuth(0)
-        // setPolar(0)
-        // setPower(50)
         api.angularVelocity.set(0, 0, 0)
         api.velocity.set(0, 0, 0)
       }
@@ -148,17 +147,17 @@ const GolfBall = (props: SphereProps) => {
         if (shootPressed) {
           shoot()
         }
-        else if (upAzimuthPressed) {
-          setAzimuth((e) => Math.min(e + 2, 80))
+        else if (upPolarPressed) {
+          setPolar((e) => Math.max(e - 2, 0))
         }
-        else if (downAzimuthPressed) {
-          setAzimuth((e) => Math.max(e - 2, 0))
+        else if (downPolarPressed) {
+          setPolar((e) => Math.min(e + 2, 80))
         }
-        else if (leftPolarPressed) {
-          setPolar((e) => e - 2)
+        else if (leftAzimuthPressed) {
+          setAzimuth((e) => e + 2)
         }
-        else if (rightPolarPressed) {
-          setPolar((e) => e + 2)
+        else if (rightAzimuthPressed) {
+          setAzimuth((e) => e - 2)
         }
         else if (increasePowerPressed) {
           setPower((e) => Math.min(e + 2, 100))
@@ -168,11 +167,19 @@ const GolfBall = (props: SphereProps) => {
         }
         
       }
+      else {
+        if (!cameraControlRef.current) return
+        
+      }
     })
 
 
   return (
     <>
+      <CameraControls 
+        ref={cameraControlRef}
+        maxPolarAngle={Math.PI/2} 
+      />
       <mesh ref={ref}>
         <sphereGeometry args={[0.2]}/>
         <meshStandardMaterial map={golfMap} color="white" />
@@ -183,9 +190,9 @@ const GolfBall = (props: SphereProps) => {
             points={[
                 currentGolfPosition,
                 [
-                  currentGolfPosition.x + 1 * Math.cos(azimuth * Math.PI / 180) * Math.cos(polar * Math.PI / 180),
-                  currentGolfPosition.y + 1 * Math.sin(azimuth * Math.PI / 180),
-                  currentGolfPosition.z + 1 * Math.cos(azimuth * Math.PI / 180) * Math.sin(polar * Math.PI / 180),
+                  currentGolfPosition.x + 1 * Math.sin(polar * Math.PI / 180) * Math.sin(azimuth * Math.PI / 180),
+                  currentGolfPosition.y + 1 * Math.cos(polar * Math.PI / 180),
+                  currentGolfPosition.z + 1 * Math.sin(polar * Math.PI / 180) * Math.cos(azimuth * Math.PI / 180),
                 ]
             ]}
             color={"#23aaff"}

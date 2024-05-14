@@ -1,11 +1,12 @@
 import { Canvas } from '@react-three/fiber';
-import { KeyboardControls, OrbitControls, Stats } from '@react-three/drei';
+import { CameraControls, KeyboardControls, OrbitControls, Stats } from '@react-three/drei';
 import { Physics, Debug } from '@react-three/cannon';
 import Wall from '../objects/Wall';
 import Game1 from '../scenes/Game1';
 import { useGlobalStatusStore } from '../states/globalStatus';
 import PowerBar from '../components/PowerBar';
 import Game2 from '../scenes/Game2';
+import { useRef } from 'react';
 
 const GameSkeleton = ({level}: {level: number}) => {
 
@@ -38,17 +39,17 @@ const GameSkeleton = ({level}: {level: number}) => {
     
       <KeyboardControls
         map={[
-          { name: 'leftPolar', keys: ['ArrowLeft', 'a', 'A'] },
-          { name: 'rightPolar', keys: ['ArrowRight', 'd', 'D'] },
-          { name: 'upAzimuth', keys: ['ArrowUp', 'w', 'W'] },
-          { name: 'downAzimuth', keys: ['ArrowDown', 's', 'S'] },
+          { name: 'leftAzimuth', keys: ['ArrowLeft', 'a', 'A'] },
+          { name: 'rightAzimuth', keys: ['ArrowRight', 'd', 'D'] },
+          { name: 'upPolar', keys: ['ArrowUp', 'w', 'W'] },
+          { name: 'downPolar', keys: ['ArrowDown', 's', 'S'] },
           { name: 'increasePower', keys: ['e', 'E'] },
           { name: 'decreasePower', keys: ['q', 'Q'] },
           { name: 'shoot', keys: ['Space'] },
         ]}
       >
         <Canvas style={{ width: '100vw', height: '100vh' }} shadows camera={{ position: [10, 10, 10], fov: 30 }}>
-          <OrbitControls minAzimuthAngle={0} />
+          {/* <OrbitControls /> */}
           <axesHelper args={[5]} />
           <Physics defaultContactMaterial={{ friction: 0.05, restitution: 0.9 }}>
             {/* <Debug> */}
