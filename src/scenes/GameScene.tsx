@@ -68,10 +68,10 @@ const GameScene = () => {
       <CylinderBlock color={COLORS.SOLF_TURTLE} position={[-5,2.5,-5]} args={[4,3]}/>
       <CylinderBlock color={COLORS.TURTLE} position={[-5,2.5,-5]} args={[6,2]}/>
       
-      <Block color={COLORS.PLAIN_PLANE} args={[50, 3, 50]} positions={[0, 0, 0]} />
+      <Block color={COLORS.PLAIN_PLANE} args={[50, 3, 50]} positions={[-15, 0, -15]} />
       
       <Flag position={[-25, 5, -25]} />
-      <PlainPlane position={[-25, 0, -25]} args={[200, 200]} color={COLORS.PLAIN_PLANE}/>
+      {/* <PlainPlane position={[-50, 0, -50]} args={[200, 200]} color={COLORS.PLAIN_PLANE}/> */}
       <Ground/>
     </Suspense>
   )

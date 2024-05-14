@@ -23,12 +23,7 @@ const Game1: React.FC = () => {
         <axesHelper args={[5]} />
         <Physics defaultContactMaterial={{ friction: 0.05, restitution: 0.9 }}>
           {/* <Debug> */}
-            <Wall position={[9.5, 0.5, 0]} args={[1, 1, 20]}/>
-            <Wall position={[-9.5, 0.5, 0]} args={[1, 1, 20]}/>
-            <Wall position={[0, 0.5, 9.5]} args={[20, 1, 1]}/>
-            <Wall position={[0, 0.5, -9.5]} args={[20, 1, 1]}/>
             <GameScene />
-      
           {/* </Debug> */}
         </Physics>
         <Stats />
