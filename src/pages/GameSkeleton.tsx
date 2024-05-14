@@ -48,7 +48,7 @@ const GameSkeleton = ({level}: {level: number}) => {
         ]}
       >
         <Canvas style={{ width: '100vw', height: '100vh' }} shadows camera={{ position: [10, 10, 10], fov: 30 }}>
-          <OrbitControls minAzimuthAngle={-Math.PI / 6} />
+          <OrbitControls minAzimuthAngle={0} />
           <axesHelper args={[5]} />
           <Physics defaultContactMaterial={{ friction: 0.05, restitution: 0.9 }}>
             {/* <Debug> */}
