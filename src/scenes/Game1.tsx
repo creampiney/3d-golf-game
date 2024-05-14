@@ -22,7 +22,7 @@ const Game1 = () => {
     }, 1000); // Delay for 1 seconds
   };
   useEffect(() => {
-    const audio = new Audio('../../public/sounds/select_link_kirby.mp3');
+    const audio = new Audio('/sounds/select_link_kirby.mp3');
     const handleEnded = () => {
       audio.currentTime = 0; // Reset the audio to the start position
       audio.play(); // Replay the audio
