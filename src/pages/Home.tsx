@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './page.css'
+
 const Home: React.FC = () => {
+  useEffect(() => {
+    const audio = new Audio('../../public/sounds/entrance_kirby.mp3');
+    const handleEnded = () => {
+      audio.currentTime = 0; // Reset the audio to the start position
+      audio.play(); // Replay the audio
+    };
+
+    audio.addEventListener('ended', handleEnded);
+    audio.play();
+
+    return () => {
+      audio.pause();
+      audio.currentTime = 0; // Reset audio to start position
+    };
+  }, []);
   return (
     <div className="w-screen h-screen flex flex-col gap-8 justify-center items-center bg-slate-900 text-slate-100">
       <div>
