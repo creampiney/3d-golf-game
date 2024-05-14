@@ -8,7 +8,10 @@ const Home: React.FC = () => {
         <h1>Welcome to Golf Game</h1>
       </div>
       <div>
-        <Link to="/game1">Start Game</Link>
+        <Link to="/game1">Level 1</Link>
+      </div>
+      <div>
+        <Link to="/game2">Level 2</Link>
       </div>
     </div>
   );

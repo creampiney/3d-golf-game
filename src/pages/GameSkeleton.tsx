@@ -5,6 +5,7 @@ import Wall from '../objects/Wall';
 import Game1 from '../scenes/Game1';
 import { useGlobalStatusStore } from '../states/globalStatus';
 import PowerBar from '../components/PowerBar';
+import Game2 from '../scenes/Game2';
 
 const GameSkeleton = ({level}: {level: number}) => {
 
@@ -54,6 +55,9 @@ const GameSkeleton = ({level}: {level: number}) => {
 
               {
                 (level == 1) && <Game1 />
+              }
+              {
+                (level == 2) && <Game2 />
               }
 
             

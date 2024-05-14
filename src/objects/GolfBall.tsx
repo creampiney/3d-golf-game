@@ -175,7 +175,7 @@ const GolfBall = (props: SphereProps) => {
     <>
       <mesh ref={ref}>
         <sphereGeometry args={[0.2]}/>
-        <meshBasicMaterial map={golfMap} color="white" />
+        <meshStandardMaterial map={golfMap} color="white" />
       </mesh>
       {
         isStationary && (
