@@ -1,7 +1,7 @@
 import {
   Environment,
 } from "@react-three/drei";
-import React, { UseState, Suspense} from "react";
+import React, { Suspense } from "react";
 import Ground from "./Ground"
 import Block from "../objects/Block";
 import PlainPlane from "../objects/PlainPlane";

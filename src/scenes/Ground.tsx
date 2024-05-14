@@ -16,12 +16,12 @@ export default function Ground(props: PlaneProps){
     
     const gridMap = useLoader(
     TextureLoader,
-    "../../public/textures/grid.png"
+    "/textures/grid.png"
     );
 
     const alphaMap = useLoader(
     TextureLoader,
-    "../../public/textures/alpha-map.png"
+    "/textures/alpha-map.png"
     );
 
     const meshRef = useRef<Mesh | null>(null);
