@@ -53,7 +53,7 @@ export default function Ground(props: PlaneProps){
         position={[-2.285, -0.01, -1.325]}
         rotation-x={-Math.PI * 0.5}
         >
-        <planeGeometry args={[12, 12]} />
+        <planeGeometry args={[100, 100]} />
         <meshBasicMaterial
             opacity={0.625}
             alphaMap={gridMap}
@@ -68,7 +68,7 @@ export default function Ground(props: PlaneProps){
         rotation-x={-Math.PI * 0.5}
         rotation-z={-0.079}
         >
-        <circleGeometry args={[600.12, 500]} />
+        <circleGeometry args={[300, 300]} />
         <MeshReflectorMaterial
             alphaMap={alphaMap}
             transparent={false}

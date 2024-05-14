@@ -50,8 +50,8 @@ import {
         
         <CylinderBlock color={COLORS.SOLF_TURTLE} position={[-25,2.5,-25]} args={[10,5]}/>
         <CylinderBlock color={COLORS.TURTLE} position={[-20,1.5,-20]} args={[15,3]}/>
-        <Block color={COLORS.SALMON} args={[5, 5, 25]} positions={[3, 0, -5]} />
-        <Block color={COLORS.RED_SALMON} args={[5, 4, 26]} positions={[3, 0, -4]} />
+        <Block color={COLORS.SALMON} args={[5, 1, 25]} positions={[3, 2, -5]} />
+        <Block color={COLORS.RED_SALMON} args={[5, 3, 27]} positions={[3, 0.5, -4]} />
         
         <Block color={COLORS.RED_SALMON} args={[5, 8, 5]} positions={[-24, 0, -16]} />
         <Block color={COLORS.SALMON} args={[28, 7, 5]} positions={[-13, 0, -15]} />
@@ -69,10 +69,11 @@ import {
         <CylinderBlock color={COLORS.TURTLE} position={[-5,2.5,-5]} args={[6,2]}/>
         
         <Block color={COLORS.PLAIN_PLANE} args={[50, 3, 50]} positions={[-15, 0, -15]} />
-        
+        <Block color={COLORS.TURTLE} args={[45, 6, 45]} positions={[-15, -3, -15]} />
+        <Block color={COLORS.PLAIN_PLANE} args={[50, 3, 50]} positions={[-15, -6, -15]} />
         <Flag position={[-25, 5, -25]} />
         {/* <PlainPlane position={[-50, 0, -50]} args={[200, 200]} color={COLORS.PLAIN_PLANE}/> */}
-        <Ground/>
+        {/* <Ground/> */}
       </Suspense>
     )
   }

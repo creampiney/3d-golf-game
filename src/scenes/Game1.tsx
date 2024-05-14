@@ -10,7 +10,9 @@ import { Track } from "../objects/Track";
 import Hole from "../objects/Hole";
 import GroundTile from "./GroundTile";
 import Wall from "../objects/Wall";
-
+import Flag from "../objects/Flag";
+import CylinderBlock from "../objects/CylinderBlock";
+import { COLORS } from "../constant"
 const Game1 = () => {
   const handleBallEnterHole = () => {
     window.location.href = '/reset';
@@ -57,50 +59,46 @@ const Game1 = () => {
 
       {/* <Block color="red" args={[3, 2, 2]} position={[3, 0, 0]} /> */}
       {/* <PlainPlane position={[0, 0, 0]} args={[100, 100]} color={[0.5,0.5,0.1]}/> */}
-      <Hole position={[-15, -0.49, -15]} onBallEnter={handleBallEnterHole} />
-
+      <Hole position={[-15, 0, -15]} onBallEnter={handleBallEnterHole} />
+      <Flag position={[-15.5,0,-15]}/>
       {/* <Ground/> */}
-
+{/* 
       <GroundTile position={[0, -0.5, -8]} args={[8, 1, 22]}/>
-      <GroundTile position={[-11, -0.5, -15]} args={[14, 1, 8]}/>
+      <GroundTile position={[-11, -0.5, -15]} args={[14, 1, 8]}/> */}
+      <Block color={COLORS.GREEN} args={[8, 1, 22]} positions={[0, -0.4, -8]} />
+      <Block color={COLORS.GREEN} args={[14, 1, 8]} positions={[-11, -0.4, -15]} />
+      
+      {[-3.5, -2.5, -1.5, -0.5, 0.5, 1.5, 2.5, 3.5].map((e) => (
+        <Block key={e} color={COLORS.PLAIN_PLANE} positions={[e, 0.3, 2.5]} args={[1, 1, 1]} />
+      ))}
+      {[1.5, 0.5, -0.5, -1.5, -2.5, -3.5, -4.5, -5.5, -6.5, -7.5, -8.5, -9.5, -10.5].map((e) => (
+        <Block key={e} color={COLORS.PLAIN_PLANE} positions={[-3.5, 0.3, e]} args={[1, 1, 1]} />
+      ))}
+      {[
+        1.5, 0.5, -0.5, -1.5, -2.5, -3.5, -4.5, -5.5, -6.5, -7.5, -8.5, -9.5, -10.5, -11.5, -12.5, -13.5,
+        -14.5, -15.5, -16.5, -17.5, -18.5,
+      ].map((e) => (
+        <Block key={e} color={COLORS.PLAIN_PLANE} positions={[3.5, 0.3, e]} args={[1, 1, 1]} />
+      ))}
+      {[-3.5, -4.5, -5.5, -6.5, -7.5, -8.5, -9.5, -10.5, -11.5, -12.5, -13.5, -14.5, -15.5, -16.5, -17.5].map((e) => (
+        <Block key={e} color={COLORS.PLAIN_PLANE} positions={[e, 0.3, -11.5]} args={[1, 1, 1]} />
+      ))}
+      {[
+        0.5, 1.5, 2.5, -0.5, -1.5, -2.5, -3.5, -4.5, -5.5, -6.5, -7.5, -8.5, -9.5, -10.5, -11.5, -12.5,
+        -13.5, -14.5, -15.5, -16.5, -17.5,
+      ].map((e) => (
+        <Block key={e} color={COLORS.PLAIN_PLANE} positions={[e, 0.3, -18.5]} args={[1, 1, 1]} />
+      ))}
+      {[-12.5, -13.5, -14.5, -15.5, -16.5, -17.5].map((e) => (
+        <Block key={e} color={COLORS.PLAIN_PLANE} positions={[-17.5, 0.3, e]} args={[1, 1, 1]} />
+      ))}
+      <Block color={COLORS.SOLF_TURTLE} args={[8.5, 2, 22.5]} positions={[0, -1, -8]} />
+      <Block color={COLORS.SOLF_TURTLE} args={[14.5, 2, 8.5]} positions={[-11, -1, -15]} />
 
-      {
-        [-3.5, -2.5, -1.5, -0.5, 0.5, 1.5, 2.5, 3.5].map((e) => (
-          <Wall key={e} position={[e, 0.5, 2.5]} args={[1, 1, 1]}/>
-        ))
-      }
-      {
-        [1.5, 0.5, -0.5, -1.5, -2.5, -3.5, -4.5, -5.5, -6.5, -7.5, -8.5, -9.5, -10.5]
-        .map((e) => (
-          <Wall key={e} position={[-3.5, 0.5, e]} args={[1, 1, 1]}/>
-        ))
-      }
-      {
-        [1.5, 0.5, -0.5, -1.5, -2.5, -3.5, -4.5, -5.5, -6.5, -7.5, -8.5, -9.5, -10.5, -11.5, -12.5, -13.5, -14.5, -15.5, -16.5, -17.5, -18.5]
-        .map((e) => (
-          <Wall key={e} position={[3.5, 0.5, e]} args={[1, 1, 1]}/>
-        ))
-      }
-      {
-        [-3.5, -4.5, -5.5, -6.5, -7.5, -8.5, -9.5, -10.5, -11.5, -12.5, -13.5, -14.5, -15.5, -16.5, -17.5]
-        .map((e) => (
-          <Wall key={e} position={[e, 0.5, -11.5]} args={[1, 1, 1]}/>
-        ))
-      }
-      {
-        [0.5, 1.5, 2.5, -0.5, -1.5, -2.5, -3.5, -4.5, -5.5, -6.5, -7.5, -8.5, -9.5, -10.5, -11.5, -12.5, -13.5, -14.5, -15.5, -16.5, -17.5]
-        .map((e) => (
-          <Wall key={e} position={[e, 0.5, -18.5]} args={[1, 1, 1]}/>
-        ))
-      }
-      {
-        [-12.5, -13.5, -14.5, -15.5, -16.5, -17.5]
-        .map((e) => (
-          <Wall key={e} position={[-17.5, 0.5, e]} args={[1, 1, 1]}/>
-        ))
-      }
-      
-      
+      <CylinderBlock color={COLORS.TURTLE} position={[-7,-1,-7]} args={[18,1.5]}/>
+      <Block color={COLORS.PLAIN_PLANE} args={[40, 3, 40]} positions={[-7, -2, -7]} />
+      <Block color={COLORS.TURTLE} args={[35, 6, 35]} positions={[-7, -5, -7]} />
+      <Block color={COLORS.PLAIN_PLANE} args={[40, 3, 40]} positions={[-7, -8, -7]} />
 
     </Suspense>
   )
