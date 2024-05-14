@@ -2,9 +2,14 @@ import { create } from 'zustand'
 
 interface GlobalStatusState {
     isStationary: boolean,
-    setStationary: (isStationary: boolean) => void
-    power: number
-    setPower: (power: number) => void
+    setStationary: (isStationary: boolean) => void,
+    power: number,
+    setPower: (power: number) => void,
+    polar: number,
+    setPolar: (polar: number) => void,
+    azimuth: number,
+    setAzimuth: (azimuth: number) => void,
+
 }
 
 export const useGlobalStatusStore = create<GlobalStatusState>((set, get) => {
@@ -13,5 +18,9 @@ export const useGlobalStatusStore = create<GlobalStatusState>((set, get) => {
         setStationary: (isStationary) => set({ isStationary }),
         power: 50,
         setPower: (power) => set({ power }),
+        polar: 90,
+        setPolar: (polar) => set({ polar }),
+        azimuth: 180,
+        setAzimuth: (azimuth) => set({ azimuth }),
     }
 })

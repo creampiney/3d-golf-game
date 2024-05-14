@@ -82,6 +82,23 @@ const GolfBall = (props: SphereProps) => {
       api.angularVelocity.set(0, 0, 0)
     }
 
+    function followPlayer() {
+      if (!cameraControlRef.current) return
+
+      const r = 50
+
+      cameraControlRef.current.setLookAt(
+        currentGolfPosition.x + r * Math.sin(cameraControlRef.current.polarAngle) * Math.sin(cameraControlRef.current.azimuthAngle), 
+        currentGolfPosition.y + r * Math.cos(cameraControlRef.current.polarAngle), 
+        currentGolfPosition.z + r * Math.sin(cameraControlRef.current.polarAngle) * Math.cos(cameraControlRef.current.azimuthAngle),
+        currentGolfPosition.x,
+        currentGolfPosition.y,
+        currentGolfPosition.z,
+        true
+      )
+
+    }
+
 
     // Subscribing API of golf ball
     useEffect(() => {
@@ -148,10 +165,10 @@ const GolfBall = (props: SphereProps) => {
           shoot()
         }
         else if (upPolarPressed) {
-          setPolar((e) => Math.max(e - 2, 0))
+          setPolar((e) => Math.max(e - 2, 10))
         }
         else if (downPolarPressed) {
-          setPolar((e) => Math.min(e + 2, 80))
+          setPolar((e) => Math.min(e + 2, 90))
         }
         else if (leftAzimuthPressed) {
           setAzimuth((e) => e + 2)
@@ -168,8 +185,7 @@ const GolfBall = (props: SphereProps) => {
         
       }
       else {
-        if (!cameraControlRef.current) return
-        
+        followPlayer()
       }
     })
 
@@ -179,6 +195,7 @@ const GolfBall = (props: SphereProps) => {
       <CameraControls 
         ref={cameraControlRef}
         maxPolarAngle={Math.PI/2} 
+        
       />
       <mesh ref={ref}>
         <sphereGeometry args={[0.2]}/>
