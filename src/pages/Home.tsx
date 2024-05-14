@@ -4,7 +4,7 @@ import './page.css'
 
 const Home: React.FC = () => {
   useEffect(() => {
-    const audio = new Audio('../../public/sounds/entrance_kirby.mp3');
+    const audio = new Audio('/sounds/entrance_kirby.mp3');
     const handleEnded = () => {
       audio.currentTime = 0; // Reset the audio to the start position
       audio.play(); // Replay the audio

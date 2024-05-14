@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Reset: React.FC = () => {
   useEffect(() => {
-    const audio = new Audio('../../public/sounds/congrutulation.mp3');
+    const audio = new Audio('/sounds/congrutulation.mp3');
     audio.play();
 
     return () => {

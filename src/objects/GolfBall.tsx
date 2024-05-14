@@ -66,7 +66,7 @@ const GolfBall = (props: SphereProps) => {
     function shoot() {
       if (power == 0) return
       // Play the hit sound
-      const hitSound = new Audio("../../public/sounds/hit.mp3")
+      const hitSound = new Audio("/sounds/hit.mp3")
       hitSound.play();
 
       setShootingPosition(new Vector3(...currentGolfPosition))
