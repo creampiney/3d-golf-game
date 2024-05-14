@@ -6,12 +6,12 @@ import { Mesh, TextureLoader } from "three";
 export function Track() {
   const result = useLoader(
     GLTFLoader,
-    "../../public/models/track.glb"
+    "/models/track.glb"
   );
 
   const colorMap = useLoader(
     TextureLoader,
-    "../../public/textures/track.png"
+    "/textures/track.png"
   );
 
   useEffect(() => {

@@ -16,7 +16,7 @@ const GameScene = () => {
 
   return (
     <Suspense fallback={null}>
-      <Environment files="../../public/textures/envmap.hdr" background={"both"}/>
+      <Environment files="/textures/envmap.hdr" background={"both"}/>
       <fog attach="fog" args={[0xcccccc,1000]} near={10}/>
       <fogExp2 args={[0xcccccc,1000]} />
       <spotLight

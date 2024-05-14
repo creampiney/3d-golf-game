@@ -15,7 +15,8 @@ const GolfBall = (props: SphereProps) => {
     // Ref and API for golf ball
     const [ref, api] = useSphere<Mesh>(() => ({
         mass: 2,
-        args: [0.1],                // Radius
+        position: [0, 0.2, 0],               // Default position
+        args: [0.2],                // Radius
         linearDamping: 0.6,         // Linear damping coefficient
         ...props
     }))
@@ -140,7 +141,7 @@ const GolfBall = (props: SphereProps) => {
   return (
     <>
       <mesh ref={ref}>
-        <sphereGeometry args={[0.1]}/>
+        <sphereGeometry args={[0.2]}/>
         <meshBasicMaterial map={golfMap} color="white" />
       </mesh>
       {
