@@ -1,23 +1,37 @@
 import {
   Environment,
 } from "@react-three/drei";
-import React, { Suspense } from "react";
-import Ground from "./Ground"
+import { Suspense,useEffect} from "react";
 import Block from "../objects/Block";
-import PlainPlane from "../objects/PlainPlane";
 import GolfBall from "../objects/GolfBall";
-import { Track } from "../objects/Track";
 import Hole from "../objects/Hole";
-import GroundTile from "./GroundTile";
-import Wall from "../objects/Wall";
 import Flag from "../objects/Flag";
 import CylinderBlock from "../objects/CylinderBlock";
 import { COLORS } from "../constant"
+
 const Game1 = () => {
   const handleBallEnterHole = () => {
-    window.location.href = '/reset';
+    const collisionSound = new Audio('/sounds/reach_hole.mp3');
+    collisionSound.play();
+    setTimeout(() => {
+      window.location.href = '/reset';
+    }, 1000); // Delay for 2 seconds
   };
+  useEffect(() => {
+    const audio = new Audio('../../public/sounds/select_link_kirby.mp3');
+    const handleEnded = () => {
+      audio.currentTime = 0; // Reset the audio to the start position
+      audio.play(); // Replay the audio
+    };
 
+    audio.addEventListener('ended', handleEnded);
+    audio.play();
+
+    return () => {
+      audio.pause();
+      audio.currentTime = 0; // Reset audio to start position
+    };
+  }, []);
   return (
     <Suspense fallback={null}>
       <Environment files="/textures/envmap.hdr" background={true}/>

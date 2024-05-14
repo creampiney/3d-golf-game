@@ -1,7 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import { KeyboardControls, OrbitControls, Stats } from '@react-three/drei';
 import { Physics, Debug } from '@react-three/cannon';
-import Wall from '../objects/Wall';
 import Game1 from '../scenes/Game1';
 import { useGlobalStatusStore } from '../states/globalStatus';
 import PowerBar from '../components/PowerBar';
