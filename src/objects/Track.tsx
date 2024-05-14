@@ -9,24 +9,24 @@ export function Track() {
     "/models/track.glb"
   );
 
-  const colorMap = useLoader(
-    TextureLoader,
-    "/textures/track.png"
-  );
+  // const colorMap = useLoader(
+  //   TextureLoader,
+  //   "/textures/track.png"
+  // );
 
-  useEffect(() => {
-    colorMap.anisotropy = 16;
-  }, [colorMap]);
+  // useEffect(() => {
+  //   colorMap.anisotropy = 16;
+  // }, [colorMap]);
 
   const mesh = result.scene.children[0] as Mesh;
 
   return (
     <>
       <mesh geometry={mesh.geometry}>
-        <meshBasicMaterial
+        {/* <meshBasicMaterial
           toneMapped={false}
           map={colorMap}
-        />
+        /> */}
       </mesh>
     </>
   );
