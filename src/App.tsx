@@ -4,8 +4,14 @@ import Game1 from './pages/GameSkeleton'
 import Reset from './pages/Reset';
 import { BrowserRouter ,Routes, Route} from 'react-router-dom';
 import GameSkeleton from './pages/GameSkeleton';
+import { useEffect } from 'react';
 
 function App () {
+
+  useEffect(() => {
+    document.title = '3D Golf Game'
+  }, [])
+
   return (
     <div>
       <BrowserRouter>
@@ -14,6 +20,7 @@ function App () {
           <Route path="/home" element={<Home/>}/>
           <Route path="/game1" element={<GameSkeleton level={1}/>}/>
           <Route path="/reset" element={<Reset/>}/>
+          <Route path="/*" element={<Home/>}/>
         </Routes>
       </BrowserRouter>
     </div>
