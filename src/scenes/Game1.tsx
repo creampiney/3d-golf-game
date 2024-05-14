@@ -49,7 +49,7 @@ const Game1 = () => {
       />
 
       <GolfBall/>
-      <Hole position={[-15, 0, -15]} onBallEnter={handleBallEnterHole} />
+      <Hole position={[-15, 0.1, -15]} onBallEnter={handleBallEnterHole} />
       <Flag position={[-15.5,0,-15]}/>
       
       <Block color={COLORS.GREEN} args={[8, 1, 22]} positions={[0, -0.4, -8]} />
