@@ -45,7 +45,7 @@ import {
           intensity={30000}
           castShadow
         />
-        <GolfBall position={[3,6,3]}/>
+        <GolfBall position={[3,3,3]}/>
         <Hole position={[-24, 5, -24]} onBallEnter={handleBallEnterHole} />     
         
         <CylinderBlock color={COLORS.SOLF_TURTLE} position={[-25,2.5,-25]} args={[10,5]}/>

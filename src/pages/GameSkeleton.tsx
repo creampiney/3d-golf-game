@@ -28,10 +28,10 @@ const GameSkeleton = ({level}: {level: number}) => {
       {
         isStationary && (
           <div className="absolute bottom-0 right-0 z-10 flex flex-col justify-center align-center bg-slate-300 text-slate-700 opacity-70 gap-2 px-2 py-2">
-            <div>Press A or D to change direction</div>
-            <div>Press W or S to change angle</div>
-            <div>Press Q or E to change power</div>
-            <div>Press space bar to shoot</div>
+            <div>Press <kbd>A</kbd> or <kbd>D</kbd> to change direction</div>
+            <div>Press <kbd>W</kbd> or <kbd>S</kbd> to change angle</div>
+            <div>Press <kbd>Q</kbd> or <kbd>E</kbd> to change power</div>
+            <div>Press <kbd>Space</kbd> to shoot</div>
           </div>
         )
       }

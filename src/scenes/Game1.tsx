@@ -49,22 +49,9 @@ const Game1 = () => {
       />
 
       <GolfBall/>
-
-
-      {/* <Wall position={[9.5, 0.5, 0]} args={[1, 1, 20]}/>
-      <Wall position={[-9.5, 0.5, 0]} args={[1, 1, 20]}/>
-      <Wall position={[0, 0.5, 9.5]} args={[20, 1, 1]}/>
-      <Wall position={[0, 0.5, -9.5]} args={[20, 1, 1]}/> */}
-
-
-      {/* <Block color="red" args={[3, 2, 2]} position={[3, 0, 0]} /> */}
-      {/* <PlainPlane position={[0, 0, 0]} args={[100, 100]} color={[0.5,0.5,0.1]}/> */}
       <Hole position={[-15, 0, -15]} onBallEnter={handleBallEnterHole} />
       <Flag position={[-15.5,0,-15]}/>
-      {/* <Ground/> */}
-{/* 
-      <GroundTile position={[0, -0.5, -8]} args={[8, 1, 22]}/>
-      <GroundTile position={[-11, -0.5, -15]} args={[14, 1, 8]}/> */}
+      
       <Block color={COLORS.GREEN} args={[8, 1, 22]} positions={[0, -0.4, -8]} />
       <Block color={COLORS.GREEN} args={[14, 1, 8]} positions={[-11, -0.4, -15]} />
       
