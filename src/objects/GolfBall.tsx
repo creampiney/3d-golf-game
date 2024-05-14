@@ -15,8 +15,10 @@ const GolfBall = (props: SphereProps) => {
       state.setStationary
     ])
     
-    const [setGlobalPower] = useGlobalStatusStore((state) => [
-      state.setPower
+    const [setGlobalPower, setGlobalPolar, setGlobalAzimuth] = useGlobalStatusStore((state) => [
+      state.setPower,
+      state.setPolar,
+      state.setAzimuth,
     ])
 
     const initialGolfPosition = props.position ? props.position : [0, 0.2, 0]
@@ -156,6 +158,16 @@ const GolfBall = (props: SphereProps) => {
     useEffect(() => {
       setGlobalPower(power)
     }, [power])
+
+    // Global polar hook
+    useEffect(() => {
+      setGlobalPolar(polar)
+    }, [polar])
+
+    // Global azimuth hook
+    useEffect(() => {
+      setGlobalAzimuth(azimuth)
+    }, [azimuth])
 
 
     // Update frame

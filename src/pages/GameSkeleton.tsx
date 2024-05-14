@@ -10,9 +10,11 @@ import { useRef } from 'react';
 
 const GameSkeleton = ({level}: {level: number}) => {
 
-  const [isStationary, power] = useGlobalStatusStore((state) => [
+  const [isStationary, power, polar, azimuth] = useGlobalStatusStore((state) => [
     state.isStationary,
     state.power,
+    state.polar,
+    state.azimuth,
   ])
 
 
@@ -20,9 +22,16 @@ const GameSkeleton = ({level}: {level: number}) => {
     <div className="w-screen h-screen relative">
       {
         isStationary && (
-          <div className="absolute bottom-0 left-0 z-10 flex flex-col justify-center align-center bg-slate-300 text-slate-700 opacity-70 gap-2 px-2 py-2">
-            <div>Power: {power}</div>
-            <PowerBar value={power} />
+          <div className="absolute bottom-0 left-0 z-10 flex justify-center align-center bg-slate-300 text-slate-700 opacity-70 gap-2 px-2 py-2">
+            <div className="h-full flex flex-col gap-2">
+              <div>Power: {power}</div>
+              <PowerBar value={power} />
+            </div>
+            <div className="h-full flex flex-col gap-2 w-40">
+              <div>Polar: {(polar * Math.PI / 180).toFixed(5)}</div>
+              <div>Azimuth: {(azimuth * Math.PI / 180).toFixed(5)}</div>
+            </div>
+            
           </div>
         )
       }
