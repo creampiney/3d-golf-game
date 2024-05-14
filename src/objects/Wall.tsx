@@ -22,7 +22,7 @@ const Wall = (props: BoxProps) => {
     wallMap.repeat.set(props.args ? props.args[0] as number/2: 10, props.args ? props.args[1] as number/2: 10)
 
     return (
-        <mesh ref={ref} castShadow receiveShadow>
+        <mesh ref={ref}>
           <boxGeometry args={props.args ? props.args : [1, 1, 1]} />
           <meshBasicMaterial map={wallMap}/>
         </mesh>
