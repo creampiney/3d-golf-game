@@ -57,7 +57,7 @@ const Game1 = () => {
 
       {/* <Block color="red" args={[3, 2, 2]} position={[3, 0, 0]} /> */}
       {/* <PlainPlane position={[0, 0, 0]} args={[100, 100]} color={[0.5,0.5,0.1]}/> */}
-      <Hole position={[-15, -0.49, -15]} onBallEnter={handleBallEnterHole} />
+      <Hole position={[-15, 0, -15]} onBallEnter={handleBallEnterHole} />
 
       {/* <Ground/> */}
 

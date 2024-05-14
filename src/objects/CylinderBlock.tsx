@@ -11,6 +11,7 @@ const CylinderBlock = (props: CylinderProps & { position?: [number, number, numb
     position: [0,0,0],
     // position: props.position || [0,0,0],
     args: [radius, radius, height, 32], // Cylinder geometry args: top radius, bottom radius, height, radial segments
+    ...props
   }));
 
   return (

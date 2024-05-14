@@ -26,6 +26,10 @@ a:hover {
   @apply text-indigo-400
 }
 
+kbd {
+  @apply px-1 py-1 bg-slate-100 rounded-md border border-slate-300 text-slate-900
+}
+
 body {
   margin: 0;
   display: flex;
