@@ -1,20 +1,23 @@
 import {
     Environment,
   } from "@react-three/drei";
-  import { useEffect, Suspense } from "react";
-  import Block from "../objects/Block";
-  import GolfBall from "../objects/GolfBall";
-  import Hole from "../objects/Hole";
-  import CylinderBlock from "../objects/CylinderBlock";
-  import { Flag } from "../objects/Flag";
-  import { COLORS } from "../constant"
+import { useEffect, Suspense } from "react";
+import Block from "../objects/Block";
+import GolfBall from "../objects/GolfBall";
+import Hole from "../objects/Hole";
+import CylinderBlock from "../objects/CylinderBlock";
+import { Flag } from "../objects/Flag";
+import { COLORS } from "../constant"
+import { useNavigate } from "react-router-dom";
 
-  const Game2 = () => {
-    const handleBallEnterHole = () => {
+
+const Game2 = () => {
+  const navigate = useNavigate();
+  const handleBallEnterHole = () => {
       const collisionSound = new Audio('/sounds/reach_hole.mp3');
       collisionSound.play();
       setTimeout(() => {
-        window.location.href = '/reset';
+        navigate('/reset')
       }, 1000); // Delay for 2 seconds
     };
     useEffect(() => {
@@ -34,7 +37,7 @@ import {
     }, []);
     return (
       <Suspense fallback={null}>
-        <Environment files="/textures/envmap.hdr" background={"both"}/>
+        <Environment files="/textures/envmap.hdr" background={true}/>
         <fog attach="fog" args={[0xcccccc,100000]} near={1}/>
         <fogExp2 args={[0xcccccc,1000]}/>
         <spotLight

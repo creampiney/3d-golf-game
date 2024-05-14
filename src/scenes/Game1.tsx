@@ -8,14 +8,18 @@ import Hole from "../objects/Hole";
 import Flag from "../objects/Flag";
 import CylinderBlock from "../objects/CylinderBlock";
 import { COLORS } from "../constant"
+import { useNavigate } from "react-router-dom";
+
 
 const Game1 = () => {
+  const navigate = useNavigate();
+
   const handleBallEnterHole = () => {
     const collisionSound = new Audio('/sounds/reach_hole.mp3');
     collisionSound.play();
     setTimeout(() => {
       window.location.href = '/reset';
-    }, 1000); // Delay for 2 seconds
+    }, 1000); // Delay for 1 seconds
   };
   useEffect(() => {
     const audio = new Audio('../../public/sounds/select_link_kirby.mp3');
