@@ -19,6 +19,7 @@ function App () {
           <Route index element={<Home/>}/>
           <Route path="/home" element={<Home/>}/>
           <Route path="/game1" element={<GameSkeleton level={1}/>}/>
+          <Route path="/game2" element={<GameSkeleton level={2}/>}/>
           <Route path="/reset" element={<Reset/>}/>
           <Route path="/*" element={<Home/>}/>
         </Routes>
