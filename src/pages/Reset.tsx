@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 const Reset: React.FC = () => {
   return (
-    <div>
-        <div className="container">
+    <div className="w-screen h-screen flex flex-col gap-5 justify-center items-center">
+        <div>
             <h1>🎉 Congratulation 🎉</h1>
         </div>
-        <div className="block">
+        <div>
             <Link to="/">Go back to Home</Link>
         </div>
     </div>

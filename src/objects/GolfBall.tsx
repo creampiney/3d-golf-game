@@ -3,18 +3,27 @@ import { Line, useKeyboardControls, useTexture } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 import { useEffect, useRef, useState } from "react"
 import { Mesh, Vector3 } from "three"
+import { useGlobalStatusStore } from "../states/globalStatus"
 
 
 
 const GolfBall = (props: SphereProps) => {
 
-    const initialGolfPosition = props.position ? props.position : [0, 1, 0]
+    const [setGlobalStationary] = useGlobalStatusStore((state) => [
+      state.setStationary
+    ])
+    
+    const [setGlobalPower] = useGlobalStatusStore((state) => [
+      state.setPower
+    ])
+
+    const initialGolfPosition = props.position ? props.position : [0, 0.2, 0]
 
     const golfMap = useTexture('/textures/golf-texture.png')
 
     // Ref and API for golf ball
     const [ref, api] = useSphere<Mesh>(() => ({
-        mass: 2,
+        mass: 20,
         position: [0, 0.2, 0],               // Default position
         args: [0.2],                // Radius
         linearDamping: 0.6,         // Linear damping coefficient
@@ -46,19 +55,29 @@ const GolfBall = (props: SphereProps) => {
     const [azimuth, setAzimuth] = useState<number>(0)
     const [power, setPower] = useState<number>(50)
 
+    // Old shooting position
+    const [shootingPosition, setShootingPosition] = useState<Vector3>(new Vector3(...initialGolfPosition))
 
     // Shooting Function
     function shoot() {
       if (power == 0) return
 
+      setShootingPosition(new Vector3(...currentGolfPosition))
       const azimuthRadian = azimuth * Math.PI / 180
       const polarRadian = polar * Math.PI / 180
-      const weightedPower = power / 5
+      const weightedPower = power / 2
       api.velocity.set(
         weightedPower * Math.cos(azimuthRadian) * Math.cos(polarRadian), 
         weightedPower * Math.sin(azimuthRadian), 
         weightedPower * Math.cos(azimuthRadian) * Math.sin(polarRadian)
       )
+    }
+
+    // Fall from the field
+    function onFall() {
+      api.velocity.set(0, 0, 0)
+      api.position.set(shootingPosition.x, shootingPosition.y, shootingPosition.z)
+      api.angularVelocity.set(0, 0, 0)
     }
 
 
@@ -97,17 +116,30 @@ const GolfBall = (props: SphereProps) => {
 
       previousGolfPosition.current = new Vector3(...currentGolfPosition)
       previousGolfVelocity.current = new Vector3(...currentGolfVelocity)
+
+      if (currentGolfPosition.y <= -30) {
+        onFall()
+      }
     }, [currentGolfPosition])
 
     // Reset shooting status if ball is stationary
     useEffect(() => {
       console.log(isStationary)
       if (isStationary) {
-        setAzimuth(0)
-        setPolar(0)
-        setPower(50)
+        // setAzimuth(0)
+        // setPolar(0)
+        // setPower(50)
+        api.angularVelocity.set(0, 0, 0)
+        api.velocity.set(0, 0, 0)
       }
+      setGlobalStationary(isStationary)
     }, [isStationary])
+
+
+    // Global power hook
+    useEffect(() => {
+      setGlobalPower(power)
+    }, [power])
 
 
     // Update frame
@@ -134,6 +166,7 @@ const GolfBall = (props: SphereProps) => {
         else if (decreasePowerPressed) {
           setPower((e) => Math.max(e - 2, 0))
         }
+        
       }
     })
 
