@@ -1,24 +1,30 @@
 import {
-    Environment,
-  } from "@react-three/drei";
-  import React, { Suspense } from "react";
-  import Ground from "./Ground"
-  import Block from "../objects/Block";
-  import PlainPlane from "../objects/PlainPlane";
-  import GolfBall from "../objects/GolfBall";
-  import { Track } from "../objects/Track";
-  import Hole from "../objects/Hole";
-  import CylinderBlock from "../objects/CylinderBlock";
-  import { Flag } from "../objects/Flag";
-  import { COLORS } from "../constant"
-  const Game2 = () => {
-    const handleBallEnterHole = () => {
-      window.location.href = '/reset';
-    };
+  Environment,
+} from "@react-three/drei";
+import React, { Suspense } from "react";
+import Ground from "./Ground"
+import Block from "../objects/Block";
+import PlainPlane from "../objects/PlainPlane";
+import GolfBall from "../objects/GolfBall";
+import { Track } from "../objects/Track";
+import Hole from "../objects/Hole";
+import CylinderBlock from "../objects/CylinderBlock";
+import { Flag } from "../objects/Flag";
+import { COLORS } from "../constant"
+import { useNavigate } from "react-router-dom";
+
+
+const Game2 = () => {
+  const navigate = useNavigate();
+
+  const handleBallEnterHole = () => {
+    // window.location.href = '/reset';
+    navigate('/reset')
+  };
   
     return (
       <Suspense fallback={null}>
-        <Environment files="/textures/envmap.hdr" background={"both"}/>
+        <Environment files="/textures/envmap.hdr" background={true}/>
         <fog attach="fog" args={[0xcccccc,100000]} near={1}/>
         <fogExp2 args={[0xcccccc,1000]}/>
         <spotLight

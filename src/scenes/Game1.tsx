@@ -13,9 +13,15 @@ import Wall from "../objects/Wall";
 import Flag from "../objects/Flag";
 import CylinderBlock from "../objects/CylinderBlock";
 import { COLORS } from "../constant"
+import { useNavigate } from "react-router-dom";
+
+
 const Game1 = () => {
+  const navigate = useNavigate();
+
   const handleBallEnterHole = () => {
-    window.location.href = '/reset';
+    // window.location.href = '/reset';
+    navigate('/reset')
   };
 
   return (
