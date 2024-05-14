@@ -45,7 +45,7 @@ import {
           intensity={30000}
           castShadow
         />
-        <GolfBall position={[3,6,3]}/>
+        <GolfBall position={[3,3,3]}/>
         <Hole position={[-24, 5, -24]} onBallEnter={handleBallEnterHole} />     
         
         <CylinderBlock color={COLORS.SOLF_TURTLE} position={[-25,2.5,-25]} args={[10,5]}/>
@@ -72,7 +72,7 @@ import {
         
         <Flag position={[-25, 5, -25]} />
         {/* <PlainPlane position={[-50, 0, -50]} args={[200, 200]} color={COLORS.PLAIN_PLANE}/> */}
-        <Ground/>
+        {/* <Ground/> */}
       </Suspense>
     )
   }
