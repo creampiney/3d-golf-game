@@ -47,12 +47,12 @@ const GameSkeleton = ({level}: {level: number}) => {
     
       <KeyboardControls
         map={[
-          { name: 'leftAzimuth', keys: ['ArrowLeft', 'a', 'A'] },
-          { name: 'rightAzimuth', keys: ['ArrowRight', 'd', 'D'] },
-          { name: 'upPolar', keys: ['ArrowUp', 'w', 'W'] },
-          { name: 'downPolar', keys: ['ArrowDown', 's', 'S'] },
-          { name: 'increasePower', keys: ['e', 'E'] },
-          { name: 'decreasePower', keys: ['q', 'Q'] },
+          { name: 'leftAzimuth', keys: ['ArrowLeft', 'a', 'A', 'ฟ'] },
+          { name: 'rightAzimuth', keys: ['ArrowRight', 'd', 'D', 'ก'] },
+          { name: 'upPolar', keys: ['ArrowUp', 'w', 'W', 'ไ'] },
+          { name: 'downPolar', keys: ['ArrowDown', 's', 'S', 'ห'] },
+          { name: 'increasePower', keys: ['e', 'E', 'ำ'] },
+          { name: 'decreasePower', keys: ['q', 'Q', 'ๆ'] },
           { name: 'shoot', keys: ['Space'] },
         ]}
       >
