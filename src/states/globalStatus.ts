@@ -9,7 +9,8 @@ interface GlobalStatusState {
     setPolar: (polar: number) => void,
     azimuth: number,
     setAzimuth: (azimuth: number) => void,
-
+    stroke: number,
+    setStroke: (stroke: number) => void,
 }
 
 export const useGlobalStatusStore = create<GlobalStatusState>((set, get) => {
@@ -22,5 +23,7 @@ export const useGlobalStatusStore = create<GlobalStatusState>((set, get) => {
         setPolar: (polar) => set({ polar }),
         azimuth: 180,
         setAzimuth: (azimuth) => set({ azimuth }),
+        stroke: 0,
+        setStroke: (stroke) => set({ stroke }),
     }
 })

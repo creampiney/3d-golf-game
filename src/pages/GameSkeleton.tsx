@@ -9,11 +9,12 @@ import { useRef } from 'react';
 
 const GameSkeleton = ({level}: {level: number}) => {
 
-  const [isStationary, power, polar, azimuth] = useGlobalStatusStore((state) => [
+  const [isStationary, power, polar, azimuth, stroke] = useGlobalStatusStore((state) => [
     state.isStationary,
     state.power,
     state.polar,
     state.azimuth,
+    state.stroke,
   ])
 
 
@@ -30,7 +31,6 @@ const GameSkeleton = ({level}: {level: number}) => {
               <div>Polar: {(polar * Math.PI / 180).toFixed(5)}</div>
               <div>Azimuth: {(azimuth * Math.PI / 180).toFixed(5)}</div>
             </div>
-            
           </div>
         )
       }
@@ -44,6 +44,9 @@ const GameSkeleton = ({level}: {level: number}) => {
           </div>
         )
       }
+      <div className="absolute top-0 right-0 z-10 flex flex-col justify-center align-center bg-slate-300 text-slate-700 opacity-70 gap-2 px-2 py-2">
+        <div>Stroke: {stroke}</div>
+      </div>
     
       <KeyboardControls
         map={[

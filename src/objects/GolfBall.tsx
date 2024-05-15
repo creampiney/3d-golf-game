@@ -11,8 +11,10 @@ const GolfBall = (props: SphereProps) => {
 
     const cameraControlRef = useRef<CameraControls>(null)
 
-    const [setGlobalStationary] = useGlobalStatusStore((state) => [
-      state.setStationary
+    const [setGlobalStationary, stroke, setStroke] = useGlobalStatusStore((state) => [
+      state.setStationary,
+      state.stroke,
+      state.setStroke,
     ])
     
     const [setGlobalPower, setGlobalPolar, setGlobalAzimuth] = useGlobalStatusStore((state) => [
@@ -68,7 +70,7 @@ const GolfBall = (props: SphereProps) => {
       // Play the hit sound
       const hitSound = new Audio("/sounds/hit.mp3")
       hitSound.play();
-
+      
       setShootingPosition(new Vector3(...currentGolfPosition))
       const azimuthRadian = azimuth * Math.PI / 180
       const polarRadian = polar * Math.PI / 180
@@ -78,6 +80,7 @@ const GolfBall = (props: SphereProps) => {
         weightedPower * Math.cos(polarRadian), 
         weightedPower * Math.sin(polarRadian) * Math.cos(azimuthRadian)
       )
+      setStroke(stroke + 1)
     }
 
     // Fall from the field
@@ -106,6 +109,9 @@ const GolfBall = (props: SphereProps) => {
 
     // Subscribing API of golf ball
     useEffect(() => {
+        // Reset stroke
+        setStroke(0)
+
         const unsubscribePosition = api.position.subscribe((v) => {
           setCurrentGolfPosition(new Vector3(...v))
         })
