@@ -101,7 +101,6 @@ const GolfBall = (props: SphereProps) => {
         currentGolfPosition.z,
         true
       )
-
     }
 
 
@@ -175,27 +174,28 @@ const GolfBall = (props: SphereProps) => {
 
     // Update frame
     useFrame((state, delta) => {
+      const deltaChange = delta * 58
       if (isStationary) {
         if (shootPressed) {
           shoot()
         }
         else if (upPolarPressed) {
-          setPolar((e) => Math.max(e - 2, 10))
+          setPolar((e) => Math.max(e - deltaChange, 10))
         }
         else if (downPolarPressed) {
-          setPolar((e) => Math.min(e + 2, 90))
+          setPolar((e) => Math.min(e + deltaChange, 90))
         }
         else if (leftAzimuthPressed) {
-          setAzimuth((e) => e + 2)
+          setAzimuth((e) => e + deltaChange)
         }
         else if (rightAzimuthPressed) {
-          setAzimuth((e) => e - 2)
+          setAzimuth((e) => e - deltaChange)
         }
         else if (increasePowerPressed) {
-          setPower((e) => Math.min(e + 2, 100))
+          setPower((e) => Math.min(e + deltaChange, 100))
         }
         else if (decreasePowerPressed) {
-          setPower((e) => Math.max(e - 2, 0))
+          setPower((e) => Math.max(e - deltaChange, 0))
         }
         
       }
