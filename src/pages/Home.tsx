@@ -25,7 +25,7 @@ const Home: React.FC = () => {
       </div>
       <div className="flex gap-5">
         {
-          [1, 2].map((level) => (
+          [1, 2, 3].map((level) => (
             <Link to={`/game${level}`} className="w-20 h-20 flex flex-col justify-center items-center border border-slate-500 rounded-2xl bg-slate-800 hover:bg-slate-700 transition-all">
               <img src="/flag.png" className="w-9 h-9" />
               <div>Level {level}</div>
