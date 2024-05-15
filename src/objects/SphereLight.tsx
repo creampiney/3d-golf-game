@@ -22,7 +22,7 @@ const SphereLight: React.FC<SphereLightProps> = (props) => {
       <sphereGeometry args={[radius, 32, 32] } />
       <meshStandardMaterial color={new Color(...color)}
                             emissive={new Color(...color)} />
-      <pointLight color={new Color(...color)} intensity={30} distance={radius * 10} />
+      <pointLight color={new Color(...color)} intensity={200} distance={radius * 10} />
     </mesh>
   );
 };
