@@ -23,7 +23,7 @@ const GameSkeleton = ({level}: {level: number}) => {
         isStationary && (
           <div className="absolute bottom-0 left-0 z-10 flex justify-center align-center bg-slate-300 text-slate-700 opacity-70 gap-2 px-2 py-2">
             <div className="h-full flex flex-col gap-2">
-              <div>Power: {power}</div>
+              <div>Power: {power.toFixed(0)}</div>
               <PowerBar value={power} />
             </div>
             <div className="h-full flex flex-col gap-2 w-40">
