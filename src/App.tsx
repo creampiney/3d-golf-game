@@ -1,6 +1,5 @@
 import './App.css'
 import Home from './pages/Home';
-import Game1 from './pages/GameSkeleton'
 import Reset from './pages/Reset';
 import { BrowserRouter ,Routes, Route} from 'react-router-dom';
 import GameSkeleton from './pages/GameSkeleton';
@@ -20,12 +19,13 @@ function App () {
           <Route path="/home" element={<Home/>}/>
           <Route path="/game1" element={<GameSkeleton level={1}/>}/>
           <Route path="/game2" element={<GameSkeleton level={2}/>}/>
+          <Route path="/game3" element={<GameSkeleton level={3}/>}/>
           <Route path="/reset" element={<Reset/>}/>
           <Route path="/*" element={<Home/>}/>
         </Routes>
       </BrowserRouter>
     </div>
   );
-};
+}
 
 export default App

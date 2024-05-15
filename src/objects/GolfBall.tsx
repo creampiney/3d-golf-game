@@ -5,8 +5,6 @@ import { useEffect, useRef, useState } from "react"
 import { Mesh, Vector3 } from "three"
 import { useGlobalStatusStore } from "../states/globalStatus"
 
-
-
 const GolfBall = (props: SphereProps) => {
 
     const cameraControlRef = useRef<CameraControls>(null)
@@ -149,6 +147,7 @@ const GolfBall = (props: SphereProps) => {
       if (currentGolfPosition.y <= -10) {
         onFall()
       }
+
     }, [currentGolfPosition])
 
     // Reset shooting status if ball is stationary
@@ -209,7 +208,6 @@ const GolfBall = (props: SphereProps) => {
         followPlayer()
       }
     })
-
 
   return (
     <>

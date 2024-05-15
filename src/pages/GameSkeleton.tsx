@@ -5,6 +5,7 @@ import Game1 from '../scenes/Game1';
 import { useGlobalStatusStore } from '../states/globalStatus';
 import PowerBar from '../components/PowerBar';
 import Game2 from '../scenes/Game2';
+import Game3 from '../scenes/Game3';
 import { useRef } from 'react';
 
 const GameSkeleton = ({level}: {level: number}) => {
@@ -71,7 +72,9 @@ const GameSkeleton = ({level}: {level: number}) => {
               {
                 (level == 2) && <Game2 />
               }
-
+              {
+                (level == 3) && <Game3 />
+              }
             
             {/* </Debug> */}
           </Physics>
