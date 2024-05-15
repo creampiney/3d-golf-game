@@ -101,7 +101,6 @@ const GolfBall = (props: SphereProps) => {
         currentGolfPosition.z,
         true
       )
-
     }
 
 
