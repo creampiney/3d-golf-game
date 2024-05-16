@@ -1,25 +1,57 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './page.css'
+import SoundToggler from '../components/SoundToggler';
+import { useSettingsStore } from '../states/settings';
 
 const Home: React.FC = () => {
-  useEffect(() => {
-    const audio = new Audio('/sounds/entrance_kirby.mp3');
+
+  const [allowSound] = useSettingsStore((state) => [
+    state.allowSound,
+  ])
+
+  const audio = useRef<HTMLAudioElement>(new Audio('/sounds/entrance_kirby.mp3'))
+
+
+  function playAudio() {
+    if (!audio.current) return
     const handleEnded = () => {
-      audio.currentTime = 0; // Reset the audio to the start position
-      audio.play(); // Replay the audio
+      if (!audio.current) return
+      audio.current.currentTime = 0; // Reset the audio to the start position
+      audio.current.play(); // Replay the audio
     };
 
-    audio.addEventListener('ended', handleEnded);
-    audio.play();
+    audio.current.addEventListener('ended', handleEnded);
+    audio.current.play();
+  }
 
+  function stopAudio() {
+    if (!audio.current) return
+    audio.current.pause();
+    audio.current.currentTime = 0; // Reset audio to start position
+  }
+
+  useEffect(() => {
+    if (allowSound) {
+      playAudio()
+    }
     return () => {
-      audio.pause();
-      audio.currentTime = 0; // Reset audio to start position
+      stopAudio()
     };
   }, []);
+
+  useEffect(() => {
+    if (allowSound) {
+      playAudio()
+    }
+    else {
+      stopAudio()
+    }
+  }, [allowSound])
+
+
   return (
-    <div className="w-screen h-screen flex flex-col gap-8 justify-center items-center bg-slate-900 text-slate-100">
+    <div className="relative w-screen h-screen flex flex-col gap-8 justify-center items-center bg-slate-900 text-slate-100">
       <div>
         <h1>Welcome to Golf Game</h1>
       </div>
@@ -32,6 +64,9 @@ const Home: React.FC = () => {
             </Link>
           ))
         }
+      </div>
+      <div className="absolute top-2 right-2">
+        <SoundToggler />
       </div>
     </div>
   );

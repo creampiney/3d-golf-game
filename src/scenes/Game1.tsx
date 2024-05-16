@@ -1,7 +1,7 @@
 import {
   Environment,
 } from "@react-three/drei";
-import { Suspense,useEffect} from "react";
+import { Suspense,useEffect, useRef} from "react";
 import Block from "../objects/Block";
 import GolfBall from "../objects/GolfBall";
 import Hole from "../objects/Hole";
@@ -9,6 +9,7 @@ import Flag from "../objects/Flag";
 import CylinderBlock from "../objects/CylinderBlock";
 import { COLORS } from "../constant"
 import { useNavigate } from "react-router-dom";
+import { useSettingsStore } from "../states/settings";
 
 
 const Game1 = () => {
@@ -21,21 +22,51 @@ const Game1 = () => {
       window.location.href = '/reset';
     }, 1000); // Delay for 1 seconds
   };
-  useEffect(() => {
-    const audio = new Audio('/sounds/select_link_kirby.mp3');
+
+  const [allowSound] = useSettingsStore((state) => [
+    state.allowSound,
+  ])
+
+  const audio = useRef<HTMLAudioElement>(new Audio('/sounds/select_link_kirby.mp3'))
+
+
+  function playAudio() {
+    if (!audio.current) return
     const handleEnded = () => {
-      audio.currentTime = 0; // Reset the audio to the start position
-      audio.play(); // Replay the audio
+      if (!audio.current) return
+      audio.current.currentTime = 0; // Reset the audio to the start position
+      audio.current.play(); // Replay the audio
     };
 
-    audio.addEventListener('ended', handleEnded);
-    audio.play();
+    audio.current.addEventListener('ended', handleEnded);
+    audio.current.play();
+  }
 
+  function stopAudio() {
+    if (!audio.current) return
+    audio.current.pause();
+    audio.current.currentTime = 0; // Reset audio to start position
+  }
+
+  useEffect(() => {
+    if (allowSound) {
+      playAudio()
+    }
     return () => {
-      audio.pause();
-      audio.currentTime = 0; // Reset audio to start position
+      stopAudio()
     };
   }, []);
+
+  useEffect(() => {
+    if (allowSound) {
+      playAudio()
+    }
+    else {
+      stopAudio()
+    }
+  }, [allowSound])
+
+ 
   return (
     <Suspense fallback={null}>
       <Environment files="/textures/envmap.hdr" background={true}/>
