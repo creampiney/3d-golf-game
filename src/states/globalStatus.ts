@@ -24,6 +24,9 @@ export const useGlobalStatusStore = create<GlobalStatusState>((set, get) => {
         azimuth: 180,
         setAzimuth: (azimuth) => set({ azimuth }),
         stroke: 0,
-        setStroke: (stroke) => set({ stroke }),
+        setStroke: (stroke) => {
+            localStorage.setItem("stroke", stroke.toFixed(0))
+            set({ stroke })
+        },
     }
 })
