@@ -1,27 +1,22 @@
-import React from 'react';
+import React, { RefObject } from 'react';
 import { Vector3 } from 'three';
 import { useFrame } from '@react-three/fiber';
-
+import { GolfBallRef } from './GolfBall';
 interface WindProps {
-    direction: Vector3; // Wind direction as a Vector3
-    speed: number; // Wind speed
+    direction: Vector3; 
+    speed: number; 
+    ballRef: RefObject<GolfBallRef>;
 }
 
-const Wind: React.FC<WindProps> = ({ direction, speed }) => {
+const Wind: React.FC<WindProps> = ({ direction, speed, ballRef }) => {
     // Update the wind effect on every frame
-    useFrame(({ scene }) => {
-        // Access all mesh objects in the scene
-        scene.traverse((object) => {
-            // Check if the object has a physics body (e.g., useCylinder, useBox, etc.)
-            if (object.userData.physics) {
-                // Apply wind force to the physics body based on direction and speed
-                const windForce = direction.clone().multiplyScalar(speed);
-                object.userData.physics.applyForce(windForce.toArray());
-            }
-        });
+    useFrame(() => {
+        if (ballRef.current) {
+            const windForce = direction.clone().multiplyScalar(speed);
+            ballRef.current?.applyWind(windForce)
+        }
     });
 
-    // Empty JSX since this component doesn't render any visible elements
     return null;
 };
 
