@@ -1,7 +1,7 @@
 import {
     Environment,
 } from "@react-three/drei";
-import { Suspense,useEffect} from "react";
+import { Suspense,useEffect, useRef} from "react";
 import Block from "../objects/Block";
 import GolfBall from "../objects/GolfBall";
 import Hole from "../objects/Hole";
@@ -12,10 +12,17 @@ import { useNavigate } from "react-router-dom";
 import SphereLight from "../objects/SphereLight";
 import WaterComponent from "../objects/WaterComponent";
 import ResetPlane from "../objects/ResetPlane";
+import Wind from "../objects/Wind";
+import {Vector3} from "three"
 
-  const Game3 = () => {
+interface GolfBallRef {
+  onFall: () => void;
+}
+
+const Game3 = () => {
     const navigate = useNavigate();
-  
+    const golfBallRef = useRef<GolfBallRef>(null);
+
     const handleBallEnterHole = () => {
       const collisionSound = new Audio('/sounds/reach_hole.mp3');
       collisionSound.play();
@@ -25,8 +32,8 @@ import ResetPlane from "../objects/ResetPlane";
     };
     const handleBallFall = () => {
       setTimeout(() => {
-        window.location.href = '/game3';
-      }, 1000); // Delay for 1 seconds
+        golfBallRef.current?.onFall();
+      }, 100); // Delay for 1 seconds
     };
    
     
@@ -70,9 +77,12 @@ import ResetPlane from "../objects/ResetPlane";
           castShadow
         />
   
-        <GolfBall position={[23,10,23]}/>
+        <GolfBall ref={golfBallRef} position={[23,10,23]}/>
         <Hole position={[-23, 2, -23]} onBallEnter={handleBallEnterHole} />
         <Flag position={[-23.5,2,-23.5]}/>
+
+        <Wind direction={new Vector3(10, 0, 0)} speed={500} />
+
         <ResetPlane position={[0,0.1,0]} args={[50,0.1,50]} onBallFall={handleBallFall}/>
         
         <SphereLight positions={[-24.5, 5, 24.5]} radius={2} color={[0, 1, 0]} />
@@ -108,12 +118,6 @@ import ResetPlane from "../objects/ResetPlane";
         <CylinderBlock color={COLORS.DARK_GREEN} position={[15, 1, 15]} args={[2, 0.2]} />
         <CylinderBlock color={COLORS.GREEN} position={[13, 1, -10]} args={[1.5, 0.2]} />
         <CylinderBlock color={COLORS.DARK_GREEN} position={[17, 1, -5]} args={[3, 0.2]} />
-
-
-
-
-
-
 
         <Block color={COLORS.PLAIN_PLANE} args={[70, 3, 70]} positions={[0, -2, 0]} />
         <Block color={COLORS.TURTLE} args={[65, 6, 65]} positions={[0, -5, 0]} />

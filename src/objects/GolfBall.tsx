@@ -1,11 +1,11 @@
 import { SphereProps, useSphere } from "@react-three/cannon"
 import { CameraControls, Line, useKeyboardControls, useTexture } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
-import { useEffect, useRef, useState } from "react"
+import { forwardRef, useImperativeHandle, useEffect, useRef, useState } from "react"
 import { Mesh, Vector3 } from "three"
 import { useGlobalStatusStore } from "../states/globalStatus"
 
-const GolfBall = (props: SphereProps) => {
+const GolfBall = forwardRef((props: SphereProps, ref) => {
 
     const cameraControlRef = useRef<CameraControls>(null)
 
@@ -26,13 +26,14 @@ const GolfBall = (props: SphereProps) => {
     const golfMap = useTexture('/textures/golf-texture.png')
 
     // Ref and API for golf ball
-    const [ref, api] = useSphere<Mesh>(() => ({
-        mass: 20,
+      const [sphereRef, api] = useSphere<Mesh>(() => ({
+        mass: 0.1,
         position: [0, 0.2, 0],               // Default position
         args: [0.2],                // Radius
         linearDamping: 0.6,         // Linear damping coefficient
         ...props
-    }))
+      }))
+    
 
 
     // Status of golf ball
@@ -87,6 +88,9 @@ const GolfBall = (props: SphereProps) => {
       api.position.set(shootingPosition.x, shootingPosition.y, shootingPosition.z)
       api.angularVelocity.set(0, 0, 0)
     }
+    useImperativeHandle(ref, () => ({
+      onFall,
+    }));
 
     function followPlayer() {
       if (!cameraControlRef.current) return
@@ -216,7 +220,7 @@ const GolfBall = (props: SphereProps) => {
         maxPolarAngle={Math.PI/2} 
         
       />
-      <mesh ref={ref}>
+      <mesh ref={sphereRef}>
         <sphereGeometry args={[0.2]}/>
         <meshStandardMaterial map={golfMap} color="white" />
       </mesh>
@@ -241,6 +245,6 @@ const GolfBall = (props: SphereProps) => {
     </>
     
   )
-}
+})
 
 export default GolfBall
