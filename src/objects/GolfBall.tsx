@@ -226,6 +226,7 @@ const GolfBall = forwardRef((props: SphereProps, ref) => {
         followPlayer()
       }
     })
+    const lineLength = power==0 ? 0 : (power/100 * 7) + 1
 
   return (
     <>
@@ -244,9 +245,9 @@ const GolfBall = forwardRef((props: SphereProps, ref) => {
             points={[
                 currentGolfPosition,
                 [
-                  currentGolfPosition.x + 1 * Math.sin(polar * Math.PI / 180) * Math.sin(azimuth * Math.PI / 180),
-                  currentGolfPosition.y + 1 * Math.cos(polar * Math.PI / 180),
-                  currentGolfPosition.z + 1 * Math.sin(polar * Math.PI / 180) * Math.cos(azimuth * Math.PI / 180),
+                  currentGolfPosition.x + lineLength * Math.sin(polar * Math.PI / 180) * Math.sin(azimuth * Math.PI / 180),
+                  currentGolfPosition.y + lineLength * Math.cos(polar * Math.PI / 180),
+                  currentGolfPosition.z + lineLength * Math.sin(polar * Math.PI / 180) * Math.cos(azimuth * Math.PI / 180),
                 ]
             ]}
             color={"#23aaff"}
