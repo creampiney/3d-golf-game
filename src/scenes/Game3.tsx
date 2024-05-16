@@ -8,19 +8,16 @@ import Hole from "../objects/Hole";
 import Flag from "../objects/Flag";
 import CylinderBlock from "../objects/CylinderBlock";
 import { COLORS } from "../constant"
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import SphereLight from "../objects/SphereLight";
 import WaterComponent from "../objects/WaterComponent";
 import ResetPlane from "../objects/ResetPlane";
 import Wind from "../objects/Wind";
 import {Vector3} from "three"
-
-interface GolfBallRef {
-  onFall: () => void;
-}
+import { GolfBallRef } from "../objects/GolfBall";
 
 const Game3 = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const golfBallRef = useRef<GolfBallRef>(null);
 
     const handleBallEnterHole = () => {
@@ -33,7 +30,7 @@ const Game3 = () => {
     const handleBallFall = () => {
       setTimeout(() => {
         golfBallRef.current?.onFall();
-      }, 100); // Delay for 1 seconds
+      }, 100); // Delay for 0.1 seconds
     };
    
     
@@ -81,7 +78,7 @@ const Game3 = () => {
         <Hole position={[-23, 2, -23]} onBallEnter={handleBallEnterHole} />
         <Flag position={[-23.5,2,-23.5]}/>
 
-        <Wind direction={new Vector3(10, 0, 0)} speed={500} />
+        <Wind direction={new Vector3(1, 0, 0)} speed={0.01} ballRef={golfBallRef}/>
 
         <ResetPlane position={[0,0.1,0]} args={[50,0.1,50]} onBallFall={handleBallFall}/>
         

@@ -1,9 +1,16 @@
-import { SphereProps, useSphere } from "@react-three/cannon"
+import { SphereProps, useSphere} from "@react-three/cannon"
 import { CameraControls, Line, useKeyboardControls, useTexture } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 import { forwardRef, useImperativeHandle, useEffect, useRef, useState } from "react"
 import { Mesh, Vector3 } from "three"
 import { useGlobalStatusStore } from "../states/globalStatus"
+
+export interface GolfBallRef {
+  onFall: () => void;
+  getPosition: () => [number, number, number];
+  applyWind: (windForce: Vector3) => void,
+}
+
 
 const GolfBall = forwardRef((props: SphereProps, ref) => {
 
@@ -27,15 +34,13 @@ const GolfBall = forwardRef((props: SphereProps, ref) => {
 
     // Ref and API for golf ball
       const [sphereRef, api] = useSphere<Mesh>(() => ({
-        mass: 0.1,
+        mass: 1,
         position: [0, 0.2, 0],               // Default position
         args: [0.2],                // Radius
         linearDamping: 0.6,         // Linear damping coefficient
         ...props
       }))
-    
-
-
+  
     // Status of golf ball
     const previousGolfPosition = useRef<Vector3>(new Vector3(initialGolfPosition[0], initialGolfPosition[1], initialGolfPosition[2]))
     const [currentGolfPosition, setCurrentGolfPosition] = useState<Vector3>(new Vector3(initialGolfPosition[0], initialGolfPosition[1], initialGolfPosition[2]))
@@ -63,6 +68,12 @@ const GolfBall = forwardRef((props: SphereProps, ref) => {
     // Old shooting position
     const [shootingPosition, setShootingPosition] = useState<Vector3>(new Vector3(...initialGolfPosition))
 
+    useImperativeHandle(ref, () => ({
+      onFall,
+      getPosition,
+      applyWind: (windForce: Vector3) => applyWind(windForce),
+    }));
+
     // Shooting Function
     function shoot() {
       if (power == 0) return
@@ -88,9 +99,12 @@ const GolfBall = forwardRef((props: SphereProps, ref) => {
       api.position.set(shootingPosition.x, shootingPosition.y, shootingPosition.z)
       api.angularVelocity.set(0, 0, 0)
     }
-    useImperativeHandle(ref, () => ({
-      onFall,
-    }));
+    function getPosition(){
+      return currentGolfPosition
+    }
+    function applyWind (windForce: Vector3) {
+      api.applyForce(windForce.toArray(), currentGolfPosition.toArray());
+    }
 
     function followPlayer() {
       if (!cameraControlRef.current) return
