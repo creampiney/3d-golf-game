@@ -47,7 +47,7 @@ const GameSkeleton = ({level}: {level: number}) => {
           </div>
         )
       }
-      <div className="absolute top-0 right-0 z-10 w-24 flex flex-col justify-center align-center bg-slate-300 text-slate-700 opacity-70 gap-2 px-2 py-2">
+      <div className="absolute top-0 right-0 z-10 w-24 flex flex-col justify-center align-center items-center bg-slate-300 text-slate-700 opacity-70 gap-2 px-2 py-2">
         <div className="flex gap-3">
           <GoBackButton />
           <SoundToggler />
