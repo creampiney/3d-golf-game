@@ -19,7 +19,7 @@ const Hole = (props: CylinderProps & { onBallEnter: () => void }) => {
   }));
 
   return (
-    <mesh ref={ref}>
+    <mesh ref={ref} name="jumper">
       <cylinderGeometry args={[0.5, 0.5, 1, 32]} />
       <meshBasicMaterial color={entered ? 'green' : 'black'} />
     </mesh>

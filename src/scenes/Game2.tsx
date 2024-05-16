@@ -10,6 +10,7 @@ import { Flag } from "../objects/Flag";
 import { COLORS } from "../constant"
 import { useNavigate } from "react-router-dom";
 import { useSettingsStore } from "../states/settings";
+import JumpPad from "../objects/JumpPad";
 
 
 const Game2 = () => {
@@ -123,6 +124,7 @@ const Game2 = () => {
         <Flag position={[-25, 5, -25]} />
         {/* <PlainPlane position={[-50, 0, -50]} args={[200, 200]} color={COLORS.PLAIN_PLANE}/> */}
         {/* <Ground/> */}
+        
       </Suspense>
     )
   }
