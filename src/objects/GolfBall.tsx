@@ -74,23 +74,33 @@ const GolfBall = forwardRef((props: SphereProps, ref) => {
       applyWind: (windForce: Vector3) => applyWind(windForce),
     }));
 
+    // Shooting Timestamp
+    const shootingTimestamp = useRef<number>(new Date().getTime())
+
     // Shooting Function
     function shoot() {
+      
       if (power == 0) return
       // Play the hit sound
-      const hitSound = new Audio("/sounds/hit.mp3")
-      hitSound.play();
+      if (new Date().getTime() - shootingTimestamp.current >= 300) {
+        shootingTimestamp.current = new Date().getTime()
+        
+        const hitSound = new Audio("/sounds/hit.mp3")
+        hitSound.play();
+        
+        setShootingPosition(new Vector3(...currentGolfPosition))
+        const azimuthRadian = azimuth * Math.PI / 180
+        const polarRadian = polar * Math.PI / 180
+        const weightedPower = power / 2
+        api.velocity.set(
+          weightedPower * Math.sin(polarRadian) * Math.sin(azimuthRadian), 
+          weightedPower * Math.cos(polarRadian), 
+          weightedPower * Math.sin(polarRadian) * Math.cos(azimuthRadian)
+        )
       
-      setShootingPosition(new Vector3(...currentGolfPosition))
-      const azimuthRadian = azimuth * Math.PI / 180
-      const polarRadian = polar * Math.PI / 180
-      const weightedPower = power / 2
-      api.velocity.set(
-        weightedPower * Math.sin(polarRadian) * Math.sin(azimuthRadian), 
-        weightedPower * Math.cos(polarRadian), 
-        weightedPower * Math.sin(polarRadian) * Math.cos(azimuthRadian)
-      )
-      setStroke(stroke + 1)
+        setStroke(stroke + 1)
+      }
+      
     }
 
     // Fall from the field
