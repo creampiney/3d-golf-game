@@ -109,7 +109,6 @@ const Game3 = () => {
         <Flag position={[-23.5,2,-23.5]}/>
 
         <Wind direction={new Vector3(1, 0, 0)} speed={0.01} ballRef={golfBallRef}/>
-
         <ResetPlane position={[0,0.1,0]} args={[50,0.1,50]} onBallFall={handleBallFall}/>
         
         <SphereLight positions={[-24.5, 5, 24.5]} radius={2} color={[0, 1, 0]} />

@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import { Link } from 'react-router-dom';
 import SoundToggler from '../components/SoundToggler';
 import { useSettingsStore } from '../states/settings';
-
+import './Reset.css'
 const Reset: React.FC = () => {
 
   const stroke = localStorage.getItem("stroke") ? localStorage.getItem("stroke") : "0"
@@ -55,17 +55,20 @@ const Reset: React.FC = () => {
 
   return (
     <div className="relative w-screen h-screen flex flex-col gap-5 justify-center items-center bg-slate-900 text-slate-100">
-        <div>
-            <h1>🎉 Congratulation 🎉</h1>
-        </div>
-        <div>
-            <span className="font-bold text-xl text-slate-100">Stroke: {stroke}</span>
-        </div>
-        <div>
-            <Link to="/">Go back to Home</Link>
-        </div>
-        <div className="absolute top-2 right-2">
-          <SoundToggler />
+        <div className="background-congra-image"></div>
+        <div className="foreground flex flex-col gap-8 justify-center items-center w-full h-full">
+          <div className='pacifico-regular'>
+              🎉Congratulation
+          </div>
+          <div>
+            <span className="kanit-semibold">Stroke: {stroke}</span>
+          </div>
+          <div className='level-block'>
+          <Link to="/" className="level-text">Go back to Home</Link>
+          </div>
+          <div className="absolute top-2 right-2">
+            <SoundToggler />
+          </div>
         </div>
     </div>
   );
