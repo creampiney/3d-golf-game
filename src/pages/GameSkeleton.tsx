@@ -30,7 +30,7 @@ const GameSkeleton = ({level}: {level: number}) => {
               <PowerBar value={power} />
             </div>
             <div className="h-full flex flex-col gap-2 w-40">
-              <div>Polar: {(90 - polar).toFixed(5)}</div>
+              <div>Angle: {(90 - polar).toFixed(5)}</div>
               <div>Azimuth: {(((azimuth + 180.0) % 360) - 180.0).toFixed(5)}</div>
             </div>
           </div>
