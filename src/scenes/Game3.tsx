@@ -16,7 +16,7 @@ import Wind from "../objects/Wind";
 import {Vector3} from "three"
 import { GolfBallRef } from "../objects/GolfBall";
 import { useSettingsStore } from "../states/settings";
-
+import Grass from "../objects/Grass";
 const Game3 = () => {
     // const navigate = useNavigate();
     const golfBallRef = useRef<GolfBallRef>(null);
@@ -103,11 +103,11 @@ const Game3 = () => {
           intensity={4}
           castShadow
         />
-  
+    
         <GolfBall ref={golfBallRef} position={[23,10,23]}/>
         <Hole position={[-23, 2, -23]} onBallEnter={handleBallEnterHole} />
         <Flag position={[-23.5,2,-23.5]}/>
-
+        <Grass instanceNumber={1000}/>
         <Wind direction={new Vector3(1, 0, 0)} speed={0.01} ballRef={golfBallRef}/>
         <ResetPlane position={[0,0.1,0]} args={[50,0.1,50]} onBallFall={handleBallFall}/>
         

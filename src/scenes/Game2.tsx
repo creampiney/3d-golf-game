@@ -19,7 +19,7 @@ const Game2 = () => {
       collisionSound.play();
       setTimeout(() => {
         navigate('/reset')
-      }, 1000); // Delay for 2 seconds
+      }, 1000); // Delay for 1 seconds
     };
 
 

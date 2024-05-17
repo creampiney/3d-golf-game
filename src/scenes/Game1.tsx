@@ -8,12 +8,12 @@ import Hole from "../objects/Hole";
 import Flag from "../objects/Flag";
 import CylinderBlock from "../objects/CylinderBlock";
 import { COLORS } from "../constant"
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useSettingsStore } from "../states/settings";
 
 
 const Game1 = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleBallEnterHole = () => {
     const collisionSound = new Audio('/sounds/reach_hole.mp3');
