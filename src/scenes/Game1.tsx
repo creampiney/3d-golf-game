@@ -20,7 +20,7 @@ const Game1 = () => {
     const collisionSound = new Audio('/sounds/reach_hole.mp3');
     collisionSound.play();
     setTimeout(() => {
-      window.location.href = '/reset';
+      navigate('/reset')
     }, 1000); // Delay for 1 seconds
   };
 

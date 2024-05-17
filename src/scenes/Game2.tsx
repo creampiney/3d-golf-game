@@ -106,11 +106,13 @@ const Game2 = () => {
         <Block color={COLORS.RED_SALMON} args={[5, 8, 5]} positions={[-24, 0, -16]} />
         <Block color={COLORS.SALMON} args={[28, 7, 5]} positions={[-13, 0, -15]} />
         <Block color={COLORS.RED_SALMON} args={[30, 6, 5]} positions={[-12, 0, -15]} />
-  
+
+        <JumpPad position={[-15,5,0]}/>
         <CylinderBlock color={COLORS.SOFT_TURTLE} position={[-15,2.5,0]} args={[2,5]}/>
         <CylinderBlock color={COLORS.SALMON} position={[-15,2.7,0]} args={[5,2]}/>
         <CylinderBlock color={COLORS.SOFT_TURTLE} position={[-15,2.7,0]} args={[7,1]}/>
         
+        <JumpPad position={[-2,5.5,-20]}/>
         <CylinderBlock color={COLORS.SOFT_TURTLE} position={[-2,3,-20]} args={[2,5]}/>
   
   

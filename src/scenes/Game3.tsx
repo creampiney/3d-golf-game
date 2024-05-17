@@ -8,7 +8,7 @@ import Hole from "../objects/Hole";
 import Flag from "../objects/Flag";
 import CylinderBlock from "../objects/CylinderBlock";
 import { COLORS } from "../constant"
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SphereLight from "../objects/SphereLight";
 import WaterComponent from "../objects/WaterComponent";
 import ResetPlane from "../objects/ResetPlane";
@@ -18,14 +18,14 @@ import { GolfBallRef } from "../objects/GolfBall";
 import { useSettingsStore } from "../states/settings";
 
 const Game3 = () => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const golfBallRef = useRef<GolfBallRef>(null);
 
     const handleBallEnterHole = () => {
       const collisionSound = new Audio('/sounds/reach_hole.mp3');
       collisionSound.play();
       setTimeout(() => {
-        window.location.href = '/reset';
+        navigate('/reset')
       }, 1000); // Delay for 1 seconds
     };
     const handleBallFall = () => {
