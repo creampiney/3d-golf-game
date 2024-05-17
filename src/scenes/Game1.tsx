@@ -10,6 +10,7 @@ import CylinderBlock from "../objects/CylinderBlock";
 import { COLORS } from "../constant"
 import { useNavigate } from "react-router-dom";
 import { useSettingsStore } from "../states/settings";
+import JumpPad from "../objects/JumpPad";
 
 
 const Game1 = () => {
@@ -135,6 +136,8 @@ const Game1 = () => {
       <Block color={COLORS.PLAIN_PLANE} args={[40, 3, 40]} positions={[-7, -2, -7]} />
       <Block color={COLORS.TURTLE} args={[35, 6, 35]} positions={[-7, -5, -7]} />
       <Block color={COLORS.PLAIN_PLANE} args={[40, 3, 40]} positions={[-7, -8, -7]} />
+
+      <JumpPad position={[-7.5, -0.25, -7.5]} args={[0.75, 0.75, 0.1, 32]} />
 
     </Suspense>
   )

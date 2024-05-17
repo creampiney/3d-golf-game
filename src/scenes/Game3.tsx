@@ -104,7 +104,7 @@ const Game3 = () => {
           castShadow
         />
   
-        <GolfBall ref={golfBallRef} position={[23,10,23]}/>
+        <GolfBall ref={golfBallRef} position={[23,2,23]}/>
         <Hole position={[-23, 2, -23]} onBallEnter={handleBallEnterHole} />
         <Flag position={[-23.5,2,-23.5]}/>
 

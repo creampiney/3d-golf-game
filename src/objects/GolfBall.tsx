@@ -38,6 +38,11 @@ const GolfBall = forwardRef((props: SphereProps, ref) => {
         position: [0, 0.2, 0],               // Default position
         args: [0.2],                // Radius
         linearDamping: 0.6,         // Linear damping coefficient
+        onCollideBegin: (e) => {
+          if (e.body.name == "jumper") {
+            jump()
+          }
+        },
         ...props
       }))
   
@@ -109,11 +114,21 @@ const GolfBall = forwardRef((props: SphereProps, ref) => {
       api.position.set(shootingPosition.x, shootingPosition.y, shootingPosition.z)
       api.angularVelocity.set(0, 0, 0)
     }
+
     function getPosition(){
       return currentGolfPosition
     }
+
     function applyWind (windForce: Vector3) {
       api.applyForce(windForce.toArray(), currentGolfPosition.toArray());
+    }
+
+    // Jump
+    function jump() {
+      let unitVectorPlane = (new Vector3(...currentGolfVelocity))
+      unitVectorPlane.y = 0
+      unitVectorPlane = unitVectorPlane.normalize()
+      api.applyImpulse([unitVectorPlane.x * 2, 10, unitVectorPlane.z * 2], [0, 0, 0])
     }
 
     function followPlayer() {
