@@ -63,9 +63,9 @@ const Reset: React.FC = () => {
           <div>
             <span className="kanit-semibold">Stroke: {stroke}</span>
           </div>
-          <div className='level-block'>
-          <Link to="/" className="level-text">Go back to Home</Link>
-          </div>
+          <Link to="/" className='level-block'>
+          <div className="level-text">Go back to Home</div>
+          </Link>
           <div className="absolute top-2 right-2">
             <SoundToggler />
           </div>
