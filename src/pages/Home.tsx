@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import './page.css'
+import './Home.css'
 import SoundToggler from '../components/SoundToggler';
 import { useSettingsStore } from '../states/settings';
 
@@ -51,22 +51,26 @@ const Home: React.FC = () => {
 
 
   return (
-    <div className="relative w-screen h-screen flex flex-col gap-8 justify-center items-center bg-slate-900 text-slate-100">
-      <div>
-        <h1>Welcome to Golf Game</h1>
-      </div>
-      <div className="flex gap-5">
-        {
-          [1, 2, 3].map((level) => (
-            <Link to={`/game${level}`} className="w-20 h-20 flex flex-col justify-center items-center border border-slate-500 rounded-2xl bg-slate-800 hover:bg-slate-700 transition-all">
-              <img src="/flag.png" className="w-9 h-9" />
-              <div>Level {level}</div>
+    <div className="relative w-screen h-screen bg-slate-900 text-slate-100">
+      <div className="background-image"></div>
+      <div className="foreground flex flex-col gap-8 justify-center items-center w-full h-full">
+        <div>
+          <div className='pacifico-bold'>Golf Game</div>
+        </div>
+        <div className="flex gap-5">
+          {[1, 2, 3].map((level) => (
+            <Link
+              key={level}
+              to={`/game${level}`}
+              className="level-block">
+              <img src="/flag.png" className="w-9 h-9" alt="flag" />
+              <div className='level-text'>LEVEL {level}</div>
             </Link>
-          ))
-        }
-      </div>
-      <div className="absolute top-2 right-2">
-        <SoundToggler />
+          ))}
+        </div>
+        <div className="absolute top-2 right-2">
+          <SoundToggler />
+        </div>
       </div>
     </div>
   );
